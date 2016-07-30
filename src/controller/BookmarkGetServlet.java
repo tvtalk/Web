@@ -25,7 +25,7 @@ public class BookmarkGetServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		//단위테스트완료
 		request.setCharacterEncoding("UTF-8");
-		response.setContentType("application/text;charset=utf-8");
+		response.setContentType("text/html;charset=utf-8");
 		HttpSession session = request.getSession();
 		String nickName = (String)session.getAttribute("nickName");
 		if(nickName==null) {

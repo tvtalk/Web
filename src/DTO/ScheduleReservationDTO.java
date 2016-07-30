@@ -6,6 +6,7 @@ public class ScheduleReservationDTO implements Serializable{
 	private int sr;
 	private String thumbnail;
 	private String title;
+	private String boradcast_brand;
 	private String broadcastingTime;
 	private String broadcastDay;
 	private String genre;
@@ -13,12 +14,13 @@ public class ScheduleReservationDTO implements Serializable{
 	public ScheduleReservationDTO() {
 		super();
 	}
-	public ScheduleReservationDTO(int sr, String thumbnail, String title, String broadcastingTime, String broadcastDay,
-			String genre, float rating) {
+	public ScheduleReservationDTO(int sr, String thumbnail, String title, String boradcast_brand,
+			String broadcastingTime, String broadcastDay, String genre, float rating) {
 		super();
 		this.sr = sr;
 		this.thumbnail = thumbnail;
 		this.title = title;
+		this.boradcast_brand = boradcast_brand;
 		this.broadcastingTime = broadcastingTime;
 		this.broadcastDay = broadcastDay;
 		this.genre = genre;
@@ -41,6 +43,12 @@ public class ScheduleReservationDTO implements Serializable{
 	}
 	public void setTitle(String title) {
 		this.title = title;
+	}
+	public String getBoradcast_brand() {
+		return boradcast_brand;
+	}
+	public void setBoradcast_brand(String boradcast_brand) {
+		this.boradcast_brand = boradcast_brand;
 	}
 	public String getBroadcastingTime() {
 		return broadcastingTime;
@@ -68,8 +76,10 @@ public class ScheduleReservationDTO implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "ScheduleReservation [sr=" + sr + ", thumbnail=" + thumbnail + ", title=" + title + ", broadcastingTime="
-				+ broadcastingTime + ", broadcastDay=" + broadcastDay + ", genre=" + genre + ", rating=" + rating + "]";
+		return "ScheduleReservationDTO [sr=" + sr + ", thumbnail=" + thumbnail + ", title=" + title
+				+ ", boradcast_brand=" + boradcast_brand + ", broadcastingTime=" + broadcastingTime + ", broadcastDay="
+				+ broadcastDay + ", genre=" + genre + ", rating=" + rating + "]";
 	}
+	
 	
 }

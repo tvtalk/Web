@@ -37,6 +37,7 @@ public class ScheduleReservationDAO {
 						(int)rs.getInt("sr") ,
 						(String)rs.getString("thumbnail"),
 						(String)rs.getString("title"),
+						(String)rs.getString("broadcast_brand"),
 						(String)rs.getString("broadcasting_time"),
 						(String)rs.getString("broadcast_day"),
 						(String)rs.getString("genre"),
@@ -68,25 +69,62 @@ public class ScheduleReservationDAO {
 	 * @param rating ½ÃÃ»·ü
 	 * @return
 	 */
-	public int insertScheduleReservation(String thumbnail , String title, String broadcastingTime, String broadcastDay , String genre , float rating){
+	public int insertScheduleReservation(String thumbnail , String title,String broadcastBrand, String broadcastingTime, String broadcastDay , String genre , float rating){
 		int result=0;
 		Connection conn = null;;
 		PreparedStatement pstmt = null;
 		try {
 			conn = DBConnection.getInstance().getConn();
 			conn.setAutoCommit(false);
-			String sql = "insert into schedule_reservation(thumbnail,title,broadcasting_time,broadcast_day,genre,rating) values(?,?,?,?,?,?);";
+			String sql = "insert into schedule_reservation(thumbnail,title,broadcast_brand,broadcasting_time,broadcast_day,genre,rating) values(?,?,?,?,?,?,?);";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, thumbnail);
 			pstmt.setString(2, title);
-			pstmt.setString(3, broadcastingTime);
-			pstmt.setString(4, broadcastDay);
-			pstmt.setString(5, genre);
-			pstmt.setFloat(6, rating);
+			pstmt.setString(3, broadcastBrand);
+			pstmt.setString(4, broadcastingTime);
+			pstmt.setString(5, broadcastDay);
+			pstmt.setString(6, genre);
+			pstmt.setFloat(7, rating);
 			result = pstmt.executeUpdate();
 			conn.commit();
 		} catch(Exception ex) {
 			ex.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch(Exception ex) {
+				ex.printStackTrace();
+			}
+		}
+		return result;
+	}
+	public int insertScheduleReservation(ScheduleReservationDTO ary){
+		int result=0;
+		Connection conn = null;;
+		PreparedStatement pstmt = null;
+		
+		try {
+			conn = DBConnection.getInstance().getConn();
+			conn.setAutoCommit(false);
+			String sql = "insert into schedule_reservation(thumbnail,title,broadcast_brand,broadcasting_time,broadcast_day,genre,rating) values(?,?,?,?,?,?,?);";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, ary.getThumbnail());
+			pstmt.setString(2, ary.getTitle());
+			pstmt.setString(3, ary.getBoradcast_brand());
+			pstmt.setString(4, ary.getBroadcastingTime());
+			pstmt.setString(5, ary.getBroadcastDay());
+			pstmt.setString(6, ary.getGenre());
+			pstmt.setFloat(7, ary.getRating());
+			result = pstmt.executeUpdate();
+			conn.commit();
+					
+				
+			
+		} catch(Exception ex) {
+			System.out.println("error message - "+ex.getMessage());
+			
+			
 		} finally {
 			try {
 				pstmt.close();
@@ -118,6 +156,7 @@ public class ScheduleReservationDAO {
 						(int)rs.getInt("sr") ,
 						(String)rs.getString("thumbnail"),
 						(String)rs.getString("title"),
+						(String)rs.getString("broadcast_brand"),
 						(String)rs.getString("broadcasting_time"),
 						(String)rs.getString("broadcast_day"),
 						(String)rs.getString("genre"),
@@ -154,6 +193,7 @@ public class ScheduleReservationDAO {
 						(int)rs.getInt("sr") ,
 						(String)rs.getString("thumbnail"),
 						(String)rs.getString("title"),
+						(String)rs.getString("broadcast_brand"),
 						(String)rs.getString("broadcasting_time"),
 						(String)rs.getString("broadcast_day"),
 						(String)rs.getString("genre"),
@@ -190,6 +230,7 @@ public class ScheduleReservationDAO {
 						(int)rs.getInt("sr") ,
 						(String)rs.getString("thumbnail"),
 						(String)rs.getString("title"),
+						(String)rs.getString("broadcast_brand"),
 						(String)rs.getString("broadcasting_time"),
 						(String)rs.getString("broadcast_day"),
 						(String)rs.getString("genre"),
@@ -230,6 +271,7 @@ public class ScheduleReservationDAO {
 						(int)rs.getInt("sr") ,
 						(String)rs.getString("thumbnail"),
 						(String)rs.getString("title"),
+						(String)rs.getString("broadcast_brand"),
 						(String)rs.getString("broadcasting_time"),
 						(String)rs.getString("broadcast_day"),
 						(String)rs.getString("genre"),

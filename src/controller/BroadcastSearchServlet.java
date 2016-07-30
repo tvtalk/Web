@@ -26,7 +26,7 @@ public class BroadcastSearchServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		/*단위테스트 완료.*/
 		request.setCharacterEncoding("UTF-8");
-		response.setContentType("application/text;charset=utf-8");
+		response.setContentType("text/html;charset=utf-8");
 		/*여기 getParameter값 넣어줘야 함.*/
 		String keyword = request.getParameter("");
 		

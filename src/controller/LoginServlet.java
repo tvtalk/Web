@@ -50,7 +50,7 @@ public class LoginServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		/*단위테스트 완료.*/
 		request.setCharacterEncoding("UTF-8");
-		response.setContentType("application/text;charset=utf-8");
+		response.setContentType("text/html;charset=utf-8");
 		String nickName = request.getParameter("nickName");
 		if(nickName ==null ) {
 			response.getWriter().print("닉네임을 입력해 주세요.");

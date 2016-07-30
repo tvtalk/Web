@@ -9,6 +9,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 public class DBConnection {
+	
 	public static final DBConnection dbConnection;
 	static {
 		dbConnection = new DBConnection();
@@ -28,5 +29,7 @@ public class DBConnection {
 	 */
 	public static void main(String [] args) {
 		DBConnection.getInstance();
+		
 	}
+	
 }

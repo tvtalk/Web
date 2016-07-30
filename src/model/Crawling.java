@@ -8,35 +8,55 @@ import org.jsoup.nodes.Element;
 import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
 
+import DTO.ScheduleReservationDTO;
 import javafx.beans.DefaultProperty;
 
 public class Crawling {
-	public Crawling() {
-	};
-
-	public static final String DEFAULT_URL = "https://search.naver.com/search.naver?where=nexearch&sm=tab_etc&ie=utf8&query=%EC%98%81%ED%99%94%EA%B0%80%EC%A2%8B%EB%8B%A4&os=660621&pkid=57"; 
-	public void crawling(String url) {
-		HttpRequest httpRequest = HttpRequest
-				.get("https://search.naver.com/search.naver?where=nexearch&sm=tab_etc&ie=utf8&query=%EC%B2%AD%EC%B6%98%EC%8B%9C%EB%8C%80&os=3619445&pkid=57");
+/*	private static Crawling instance;
+	private Crawling() {};
+	public static Crawling getInstance(){return instance;}
+	static {
+		instance = new Crawling();
+	}
+*/
+	public Crawling(){}
+	//public static final String DEFAULT_URL = "https://search.naver.com/search.naver?where=nexearch&sm=tab_etc&ie=utf8&query=%EC%98%81%ED%99%94%EA%B0%80%EC%A2%8B%EB%8B%A4&os=660621&pkid=57"; 
+	public ScheduleReservationDTO crawling(String url) {
+		HttpRequest httpRequest = HttpRequest.get(url);
 		if (httpRequest.code() != 200)
-			return;
+			return null;
 		System.out.println("¼º°ø");
+		
 		String res = httpRequest.body();
 		Document doc = Jsoup.parse(res);
-		StringBuilder str = new StringBuilder();
-		String programName = getProgramName(doc);
-		str.append(programName+",");
-		String programGener = getProgramGener(doc);
-		str.append(programGener+",");
-		String programTime = getProgramTime(doc);
-		str.append(programTime+",");
-		String programRating = getProgramRating(doc);
-		str.append(programRating+",");
+		
 		String programImageLink = getProgramImageLink(doc);
-		str.append(programImageLink+",");
+		
+		
+		String programName = getProgramName(doc);
+		
+		
+		String originalTime = getProgramTime(doc);
+		String programTime = ".";
+		String programDay = ".";
+		if(originalTime.length()>4) {
+			 programTime = originalTime.substring(originalTime.length()-4, originalTime.length());
+			 programDay = originalTime.split("¿À")[0].trim();
+		}
+		
 		String programChanel = getProgramChanel(doc);
-		str.append(programChanel+",");
-		System.out.println(str.toString());
+		
+		
+		String programGener = getProgramGener(doc);
+		if(programGener == null ){
+			programGener="-";
+		}
+		
+		String programRating = getProgramRating(doc);
+		
+		
+		return new ScheduleReservationDTO(0,programImageLink,programName,programChanel,programTime,programDay,programGener,Float.parseFloat(programRating.substring(0, programRating.length()-1)));
+		
 		
 	}
 	public String getProgramName(Document doc){
