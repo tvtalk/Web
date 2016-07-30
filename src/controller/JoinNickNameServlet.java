@@ -22,7 +22,7 @@ public class JoinNickNameServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("application/text;charset=utf-8");
-		new Crawling().crawling();
+		new Crawling().crawling("");
 	}
 
 	@Override
@@ -30,7 +30,7 @@ public class JoinNickNameServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 			request.setCharacterEncoding("UTF-8");
 			response.setContentType("application/text;charset=utf-8");
-			new Crawling().crawling();			
+			new Crawling().crawling("");			
 	}
 	
 }
