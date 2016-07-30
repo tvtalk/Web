@@ -23,13 +23,20 @@ public class Crawling {
 		System.out.println("¼º°ø");
 		String res = httpRequest.body();
 		Document doc = Jsoup.parse(res);
+		StringBuilder str = new StringBuilder();
 		String programName = getProgramName(doc);
+		str.append(programName+",");
 		String programGener = getProgramGener(doc);
+		str.append(programGener+",");
 		String programTime = getProgramTime(doc);
+		str.append(programTime+",");
 		String programRating = getProgramRating(doc);
+		str.append(programRating+",");
 		String programImageLink = getProgramImageLink(doc);
+		str.append(programImageLink+",");
 		String programChanel = getProgramChanel(doc);
-		System.out.println(programChanel);
+		str.append(programChanel+",");
+		System.out.println(str.toString());
 		
 	}
 	public String getProgramName(Document doc){
