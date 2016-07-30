@@ -16,25 +16,58 @@ public class Crawling {
 
 	public static final String DEFAULT_URL = "https://search.naver.com/search.naver?where=nexearch&sm=tab_etc&ie=utf8&query=%EC%98%81%ED%99%94%EA%B0%80%EC%A2%8B%EB%8B%A4&os=660621&pkid=57"; 
 	public void crawling(String url) {
-		System.out.println("¤¾2");
 		HttpRequest httpRequest = HttpRequest
-				.get("https://search.naver.com/search.naver?where=nexearch&sm=tab_etc&ie=utf8&query=%EC%98%81%ED%99%94%EA%B0%80%EC%A2%8B%EB%8B%A4&os=660621&pkid=57");
-		String body = "";
+				.get("https://search.naver.com/search.naver?where=nexearch&sm=tab_etc&ie=utf8&query=%EC%B2%AD%EC%B6%98%EC%8B%9C%EB%8C%80&os=3619445&pkid=57");
 		if (httpRequest.code() != 200)
 			return;
+		System.out.println("¼º°ø");
 		String res = httpRequest.body();
 		Document doc = Jsoup.parse(res);
+		String programName = getProgramName(doc);
+		String programGener = getProgramGener(doc);
+		String programTime = getProgramTime(doc);
+		String programRating = getProgramRating(doc);
+		String programImageLink = getProgramImageLink(doc);
+		String programChanel = getProgramChanel(doc);
+		System.out.println(programChanel);
+		
+	}
+	public String getProgramName(Document doc){
 		Elements rows = doc.select("div.title");
-		// Elements rows = doc.select("html body #wrap #container di div div.list_program_wrap.ch11 ul.list_program li.on");
 		for (Element row : rows) {
 			for (Element r : row.children()) {
 				Elements i = r.getElementsByTag("a");
 				for(Element e : i) {
-					System.out.println(e.text());
-					
+					return e.text();
 				}
 			}
-			
 		}
+		return null;
 	}
+	public String getProgramGener(Document doc){
+		Elements rows = doc.select("div.info_bar");
+		for (Element row : rows) {
+			for (Element r : row.children()) {
+				Elements i = r.getElementsByTag("a");
+				for(Element e : i) {
+					return e.text();
+				}
+			}
+		}
+		return null;
+	}
+	public String getProgramTime(Document doc) {
+		Element row = doc.select("div.brcs_detail span.inline").first();
+		return row.select("a").first().nextSibling().toString();
+	}
+	public String getProgramRating(Document doc) {
+		return doc.select("dd.bdcast_rate em.fred").first().text().toString();
+	}
+	public String getProgramImageLink(Document doc) {
+		return doc.select("div.brcs_box  div.brcs_thumb img").first().attr("src").toString();
+	}
+	public String getProgramChanel(Document doc) {
+		return doc.select("span.inline a").first().text().toString();
+	}
+
 }

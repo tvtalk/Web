@@ -31,10 +31,5 @@ public class JoinNickNameServlet extends HttpServlet {
 			request.setCharacterEncoding("UTF-8");
 			response.setContentType("application/text;charset=utf-8");
 			new Crawling().crawling("");			
-	}
-	
+	}	
 }
-/*
- * 
- *
- */
