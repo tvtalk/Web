@@ -17,7 +17,6 @@ public class DBConnection {
 		Context initCtx = new InitialContext();
 		Context envCtx = (Context) initCtx.lookup("java:comp/env");
 		DataSource ds = (DataSource)envCtx.lookup("jdbc/tvtalk");
-		
 		return ds.getConnection();
 	}
 	public static DBConnection getInstance() {

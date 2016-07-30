@@ -8,11 +8,14 @@ import org.jsoup.nodes.Element;
 import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
 
+import javafx.beans.DefaultProperty;
+
 public class Crawling {
 	public Crawling() {
 	};
 
-	public void crawling() {
+	public static final String DEFAULT_URL = "https://search.naver.com/search.naver?where=nexearch&sm=tab_etc&ie=utf8&query=%EC%98%81%ED%99%94%EA%B0%80%EC%A2%8B%EB%8B%A4&os=660621&pkid=57"; 
+	public void crawling(String url) {
 		System.out.println("¤¾2");
 		HttpRequest httpRequest = HttpRequest
 				.get("https://search.naver.com/search.naver?where=nexearch&sm=tab_etc&ie=utf8&query=%EC%98%81%ED%99%94%EA%B0%80%EC%A2%8B%EB%8B%A4&os=660621&pkid=57");
@@ -28,9 +31,8 @@ public class Crawling {
 				Elements i = r.getElementsByTag("a");
 				for(Element e : i) {
 					System.out.println(e.text());
+					
 				}
-			//	Element program_time = row.getElementsByTag("a").get(0);
-			//	System.out.println("a : " + program_time.text());
 			}
 			
 		}

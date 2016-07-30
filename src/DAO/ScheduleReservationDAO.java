@@ -217,9 +217,13 @@ public class ScheduleReservationDAO {
 		ResultSet rs = null;
 		try {
 			conn = DBConnection.getInstance().getConn();
-			String sql = "select * from schedule_reservation where title like ? or broadcating_time like ? or broadcast_day like ? or genre like ? or rating like ?";
+			String sql = "select * from schedule_reservation where title like ? or broadcasting_time like ? or broadcast_day like ? or genre like ? or rating like ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, '%'+keyword+'%');
+			pstmt.setString(2, '%'+keyword+'%');
+			pstmt.setString(3, '%'+keyword+'%');
+			pstmt.setString(4, '%'+keyword+'%');
+			pstmt.setString(5, '%'+keyword+'%');
 			rs = pstmt.executeQuery();
 			while( rs.next() ) {
 				list.add(new ScheduleReservationDTO(
