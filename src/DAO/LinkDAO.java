@@ -16,8 +16,8 @@ public class LinkDAO {
 	public static LinkDAO getInstance(){return instance;}
 	private LinkDAO(){}
 	
-	public List<String> getAllLink(){
-		List<String> list = new ArrayList<String>();
+	public ArrayList<String> getAllLink(){
+		ArrayList<String> list = new ArrayList<String>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -27,7 +27,7 @@ public class LinkDAO {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			while( rs.next() ) {
-				list.add( rs.getString("link") );
+				list.add( rs.getString("url") );
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();

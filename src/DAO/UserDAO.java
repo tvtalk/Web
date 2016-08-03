@@ -56,7 +56,7 @@ public class UserDAO {
 			while( rs.next() ) {
 				/* nickname이 있는경우  */
 				String nickN = rs.getString("nickname");
-				return nickN.equals(nickN); 
+				return nickN.equals(nickName); 
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();

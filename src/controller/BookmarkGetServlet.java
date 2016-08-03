@@ -24,6 +24,7 @@ public class BookmarkGetServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//단위테스트완료
+		System.out.println("bookmaerk gd");
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=utf-8");
 		HttpSession session = request.getSession();
@@ -33,8 +34,11 @@ public class BookmarkGetServlet extends HttpServlet {
 			response.getWriter().println("로그인해주세요");
 		}
 		List<BookmarkDTO> list = BookmarkDAO.getInstance().getBookmark(nickName);
-		for(BookmarkDTO obj : list )
-			System.out.println(obj.toString());
-		/*여기에 디스패쳐부분*/
+		/*확인용*/
+		/*for(BookmarkDTO obj : list )
+			System.out.println(obj.toString());*/
+		request.setAttribute("bookmarks", list);
+		request.getRequestDispatcher("form_bookmark.jsp").forward(request, response);
+		
 	}
 }

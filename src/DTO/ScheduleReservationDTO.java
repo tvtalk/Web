@@ -76,9 +76,7 @@ public class ScheduleReservationDTO implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "ScheduleReservationDTO [sr=" + sr + ", thumbnail=" + thumbnail + ", title=" + title
-				+ ", boradcast_brand=" + boradcast_brand + ", broadcastingTime=" + broadcastingTime + ", broadcastDay="
-				+ broadcastDay + ", genre=" + genre + ", rating=" + rating + "]";
+		return "insert into schedule_reservation(thumbnail,title,broadcast_brand,broadcasting_time,broadcast_day,genre,rating) values('"+thumbnail + "','" + title+ "','" + boradcast_brand + "','" + broadcastingTime + "','"+ broadcastDay + "','" + genre + "','" + rating+"');";
 	}
 	
 	

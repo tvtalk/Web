@@ -17,7 +17,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>ChatJoinServlet</servlet-name>
-    <url-pattern>/controller.ChatJoinServlet</url-pattern>
+    <url-pattern>/join</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -47,7 +47,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>BookmarkGetServlet</servlet-name>
-    <url-pattern>/BookmarkGetServlet</url-pattern>
+    <url-pattern>/bookmark</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -68,5 +68,35 @@
   <servlet-mapping>
     <servlet-name>BookmarkAddServlet</servlet-name>
     <url-pattern>/BookmarkAddServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>RealtimeScheduleServlet</display-name>
+    <servlet-name>RealtimeScheduleServlet</servlet-name>
+    <servlet-class>controller.RealtimeScheduleServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RealtimeScheduleServlet</servlet-name>
+    <url-pattern>/realtime</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SearchServlet</display-name>
+    <servlet-name>SearchServlet</servlet-name>
+    <servlet-class>controller.SearchServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SearchServlet</servlet-name>
+    <url-pattern>/search</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GenreSearchServlet</display-name>
+    <servlet-name>GenreSearchServlet</servlet-name>
+    <servlet-class>controller.GenreSearchServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GenreSearchServlet</servlet-name>
+    <url-pattern>/genre</url-pattern>
   </servlet-mapping>
 </web-app>

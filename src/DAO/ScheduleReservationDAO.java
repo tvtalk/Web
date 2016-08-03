@@ -29,7 +29,7 @@ public class ScheduleReservationDAO {
 		ResultSet rs = null;
 		try {
 			conn = DBConnection.getInstance().getConn();
-			String sql = "select * from schedule_reservation;";
+			String sql = "select * from schedule_reservation order by broadcasting_time;";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			while(rs.next()){
@@ -122,7 +122,7 @@ public class ScheduleReservationDAO {
 				
 			
 		} catch(Exception ex) {
-			System.out.println("error message - "+ex.getMessage());
+			ex.printStackTrace();
 			
 			
 		} finally {
@@ -258,13 +258,50 @@ public class ScheduleReservationDAO {
 		ResultSet rs = null;
 		try {
 			conn = DBConnection.getInstance().getConn();
-			String sql = "select * from schedule_reservation where title like ? or broadcasting_time like ? or broadcast_day like ? or genre like ? or rating like ?";
+			String sql = "select * from schedule_reservation where title like ? or broadcasting_time like ? or broadcast_day like ? or genre like ? or rating like ?;";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, '%'+keyword+'%');
 			pstmt.setString(2, '%'+keyword+'%');
 			pstmt.setString(3, '%'+keyword+'%');
 			pstmt.setString(4, '%'+keyword+'%');
 			pstmt.setString(5, '%'+keyword+'%');
+			rs = pstmt.executeQuery();
+			while( rs.next() ) {
+				list.add(new ScheduleReservationDTO(
+						(int)rs.getInt("sr") ,
+						(String)rs.getString("thumbnail"),
+						(String)rs.getString("title"),
+						(String)rs.getString("broadcast_brand"),
+						(String)rs.getString("broadcasting_time"),
+						(String)rs.getString("broadcast_day"),
+						(String)rs.getString("genre"),
+						(float)rs.getFloat("rating")
+						)); 
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+				pstmt.close();
+				rs.close();
+			} catch(Exception ex) {
+				ex.printStackTrace();
+			}
+			
+		}
+		return list;
+	}
+	public List<ScheduleReservationDTO> searchGenreNo(String no){
+		List<ScheduleReservationDTO> list = new ArrayList<ScheduleReservationDTO>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = DBConnection.getInstance().getConn();
+			String sql = "select * from schedule_reservation where genre=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,no.trim());
 			rs = pstmt.executeQuery();
 			while( rs.next() ) {
 				list.add(new ScheduleReservationDTO(
